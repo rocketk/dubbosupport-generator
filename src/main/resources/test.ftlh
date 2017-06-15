@@ -1,0 +1,4 @@
+groupId: ${groupId}
+artifactId: ${artifactId}
+
+
