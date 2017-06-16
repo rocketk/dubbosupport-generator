@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info">
+ 
+ 	<Properties>
+		<Property name="logdir">logs/provider</Property>
+	</Properties>
+	<Appenders>
+		<!-- 定义控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n" />
+		</Console>
+		<RollingRandomAccessFile name="providerAppender" fileName="${logdir}/providerAppender.log"
+								 filePattern="${logdir}/%d{yyyy-MM}/tddl_%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="errorAppender" fileName="${logdir}/error.log"
+			filePattern="${logdir}/%d{yyyy-MM}/error_%d{yyyy-MM-dd}.log">
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="warnAppender" fileName="${logdir}/WARN.log"
+			filePattern="${logdir}/%d{yyyy-MM}/WARN_%d{yyyy-MM-dd}.log">
+			<Filters>
+				<ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/> 
+				<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+
+	</Appenders>
+	<Loggers>
+		<AsyncLogger name="py.dubbosupport" level="warn" >
+			<AppenderRef ref="providerAppender" />
+		</AsyncLogger>
+
+
+		<!-- log4j level 不会继承root AsyncLogger，所以需要显式指定 -->
+		<AsyncLogger level="warn" name="com">
+		</AsyncLogger>
+		<AsyncLogger level="warn" name="cn">
+		</AsyncLogger>
+		<AsyncLogger level="warn" name="org">
+		</AsyncLogger>
+		<AsyncLogger level="warn" name="net">
+		</AsyncLogger>
+
+		<Root level="info">
+			<AppenderRef ref="warnAppender" />
+			<AppenderRef ref="errorAppender" />
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+
+
+</Configuration>

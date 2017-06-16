@@ -1,0 +1,21 @@
+<assembly>
+	<id>interface-only</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.directory}/classes</directory>
+			<outputDirectory>/</outputDirectory>
+			<fileMode>0644</fileMode>
+			<includes>
+				<include>py/dubbosupport/sample/provider/service/*</include>
+				<include>py/dubbosupport/sample/provider/exception/*</include>
+			</includes>
+			<excludes>
+				<exclude>py/dubbosupport/sample/provider/service/impl</exclude>
+			</excludes>
+		</fileSet>
+	</fileSets>
+</assembly>

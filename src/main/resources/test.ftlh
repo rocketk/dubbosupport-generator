@@ -1,4 +1,0 @@
-groupId: ${groupId}
-artifactId: ${artifactId}
-
-

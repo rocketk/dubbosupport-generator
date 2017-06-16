@@ -6,38 +6,49 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Hello world!
  */
 public class Main {
-    static Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-    static Map<String, String> root = new HashMap<String, String>();
-    static String outputDir = "/Users/pengyu/develop/temp";
-    static String projectName = "sample-provider";
-    static String packageName = "com.unicompayment.basetools";
+    Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
+    ConfigObject co = new ConfigObject();
 
-    static {
-        cfg.setClassForTemplateLoading(Main.class, "/");
+    private Main() {
+        loadConfig();
+        loadFreemarkerConfiguration();
+    }
+
+    private void loadConfig() {
+        co.setApplicationName(ConfigUtil.getString("applicationName"));
+        co.setArtifactId(ConfigUtil.getString("artifactId"));
+        co.setGroupId(ConfigUtil.getString("groupId"));
+        co.setNexusUrl(ConfigUtil.getString("nexusUrl"));
+        co.setOutputDir(ConfigUtil.getString("outputDir"));
+        co.setPackageName(ConfigUtil.getString("packageName"));
+        co.setProjectName(ConfigUtil.getString("projectName"));
+        co.setProviderPort(ConfigUtil.getString("providerPort"));
+        co.setVersion(ConfigUtil.getString("version"));
+        co.setZookeeper(ConfigUtil.getString("zookeeper"));
+    }
+    private void loadFreemarkerConfiguration() {
+        cfg.setClassForTemplateLoading(Main.class, "/templates");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
-        root.put("groupId", "com.unicompayment.basetools");
-        root.put("artifactId", "dubbo-support");
     }
 
     public static void main(String[] args) throws IOException, TemplateException {
-        buildPackage();
+        Main main = new Main();
     }
 
-    private static void buildPackage() throws IOException, TemplateException {
+    private void buildPackage() throws IOException, TemplateException {
         Template temp = cfg.getTemplate("test.ftlh");
-        String packageDirStr = outputDir + File.separator +
-                projectName + File.separator + "src" + File.separator + "main" + File.separator + "java";
-        for (String s : packageName.trim().split("\\.")) {
+        String packageDirStr = co.outputDir + File.separator +
+                co.projectName + File.separator + "src" + File.separator + "main" + File.separator + "java";
+        for (String s : co.packageName.trim().split("\\.")) {
             packageDirStr += File.separator + s;
         }
         File packageDir = new File(packageDirStr);
