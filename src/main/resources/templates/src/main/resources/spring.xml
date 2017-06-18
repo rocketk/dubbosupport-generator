@@ -15,7 +15,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:application.properties</value>
-				<value>classpath:config.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -24,5 +23,5 @@
 	<import resource="consumer.xml" />
 
 	<context:annotation-config></context:annotation-config>
-	<context:component-scan base-package="py.dubbosupport.sample.provider.*"></context:component-scan>
+	<context:component-scan base-package="${basePackageName}.*"></context:component-scan>
 </beans>

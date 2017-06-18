@@ -1,4 +1,4 @@
-package py.dubbosupport.sample.provider.service;
+package ${basePackageName}.service;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Created by pengyu on 2017/6/15.
+ * Created by Generator.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {

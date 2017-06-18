@@ -1,5 +1,5 @@
 @echo off
-rem provided by pengyu
+rem provided by Generator
 rem params 
 rem make sure that repositoryId exists in your maven-settings file.
 rem echo %~dp0

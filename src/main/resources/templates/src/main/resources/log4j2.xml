@@ -10,16 +10,16 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n" />
 		</Console>
-		<RollingRandomAccessFile name="providerAppender" fileName="${logdir}/providerAppender.log"
-								 filePattern="${logdir}/%d{yyyy-MM}/tddl_%d{yyyy-MM-dd}.log">
+		<RollingRandomAccessFile name="providerAppender" fileName="${r'${logdir}'}/providerAppender.log"
+								 filePattern="${r'${logdir}'}/%d{yyyy-MM}/tddl_%d{yyyy-MM-dd}.log">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n"/>
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
 			</Policies>
 		</RollingRandomAccessFile>
 
-		<RollingRandomAccessFile name="errorAppender" fileName="${logdir}/error.log"
-			filePattern="${logdir}/%d{yyyy-MM}/error_%d{yyyy-MM-dd}.log">
+		<RollingRandomAccessFile name="errorAppender" fileName="${r'${logdir}'}/error.log"
+			filePattern="${r'${logdir}'}/%d{yyyy-MM}/error_%d{yyyy-MM-dd}.log">
 			<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}, %p, %c{30}:%L, %t, %m%n"/>
 			<Policies>
@@ -27,8 +27,8 @@
 			</Policies>
 		</RollingRandomAccessFile>
 		
-		<RollingRandomAccessFile name="warnAppender" fileName="${logdir}/WARN.log"
-			filePattern="${logdir}/%d{yyyy-MM}/WARN_%d{yyyy-MM-dd}.log">
+		<RollingRandomAccessFile name="warnAppender" fileName="${r'${logdir}'}/WARN.log"
+			filePattern="${r'${logdir}'}/%d{yyyy-MM}/WARN_%d{yyyy-MM-dd}.log">
 			<Filters>
 				<ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/> 
 				<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -41,7 +41,7 @@
 
 	</Appenders>
 	<Loggers>
-		<AsyncLogger name="py.dubbosupport" level="warn" >
+		<AsyncLogger name="${r'${basePackageName}'}" level="warn" >
 			<AppenderRef ref="providerAppender" />
 		</AsyncLogger>
 

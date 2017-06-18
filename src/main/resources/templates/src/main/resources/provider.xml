@@ -8,12 +8,12 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         ">
  
-    <dubbo:application name="${application.name}"  />
+    <dubbo:application name="${r'${application.name}'}"  />
     
-    <dubbo:registry  protocol="zookeeper" address="${zookeeper_registry}"  file="logs/${application.name}_zookeeper.cach" />
+    <dubbo:registry  protocol="zookeeper" address="${r'${zookeeper_registry}'}"  file="logs/${r'${application.name}'}_zookeeper.cach" />
      
-    <dubbo:protocol name="dubbo" port="${provider.port}"  />
+    <dubbo:protocol name="dubbo" port="${r'${provider.port}'}"  />
      
-	<dubbo:service interface="py.dubbosupport.sample.provider.service.SimpleService" ref="simpleService" timeout="50000" retries="0" />
-	<bean id="simpleService" class="py.dubbosupport.sample.provider.service.impl.SimpleServiceImpl" />
+	<dubbo:service interface="${basePackageName}.service.SimpleService" ref="simpleService" timeout="50000" retries="0" />
+	<bean id="simpleService" class="${basePackageName}.service.impl.SimpleServiceImpl" />
 </beans>

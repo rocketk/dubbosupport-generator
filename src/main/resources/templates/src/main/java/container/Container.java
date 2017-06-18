@@ -1,14 +1,14 @@
-package py.dubbosupport.container;
+package ${basePackageName}.container;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by pengyu on 2015/5/19.
+ * Created by Generator.
  */
 public class Container {
-	private final Logger logger = LoggerFactory.getLogger(py.dubbosupport.container.Container.class);
+	private final Logger logger = LoggerFactory.getLogger(${basePackageName}.container.Container.class);
 	/**
 	 * spring配置文件名必须是spring.xml，并且必须放在resources下面
 	 */
