@@ -1,10 +1,10 @@
-package py.dubbosupport.sample.provider.service.impl;
+package ${basePackageName}.service.impl;
 
 
-import py.dubbosupport.sample.provider.service.SimpleService;
+import ${basePackageName}.service.SimpleService;
 
 /**
- * Created by pengyu on 2017/6/15.
+ * Created by Generator.
  */
 public class SimpleServiceImpl implements SimpleService {
     @Override

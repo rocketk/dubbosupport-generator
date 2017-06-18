@@ -1,7 +1,7 @@
-package py.dubbosupport.sample.provider.service;
+package ${basePackageName}.service;
 
 /**
- * Created by pengyu on 2017/6/15.
+ * Created by Generator.
  */
 public interface SimpleService {
     public String getUserInfo(String userId);

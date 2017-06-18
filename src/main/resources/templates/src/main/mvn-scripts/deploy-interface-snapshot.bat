@@ -1,13 +1,13 @@
 @echo off
-rem provided by pengyu
+rem provided Generator
 rem params 
 rem make sure that repositoryId exists in your maven-settings file.
-set groupId=py.dubbosupport
-set artifactId=dubbosupport-sample-provider
-set version=1.0
+set groupId=${groupId}
+set artifactId=${artifactId}
+set version=${version}
 set packaging=jar
-set url=http://192.168.8.3:8080/nexus/content/repositories/snapshots
-set repositoryId=nexus-repos
+set url=${nexusSnapshotUrl!}
+set repositoryId=${nexusRepoId!}
 set classifier=interface-only
 set file=.\target\%artifactId%-%version%-%classifier%.%packaging%
 rem 

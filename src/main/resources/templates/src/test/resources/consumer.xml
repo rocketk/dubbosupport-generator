@@ -10,12 +10,12 @@
 
 
 
-    <dubbo:application name="aa" />
+    <dubbo:application name="${r'${application.name}'}" />
     <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样，此参数不是匹配条件，你当前项目叫什么名字就填什么，和提供者消费者角色无关-->
-    <dubbo:consumer timeout="10000" check="false" />
+    <dubbo:consumer timeout="5000" check="false" />
     <!-- 使用zookeeper广播注册中心暴露发现服务地址 -->
 
-    <dubbo:registry id="dev" protocol="zookeeper" address="192.168.7.143:2181" />
+    <dubbo:registry id="dev" protocol="zookeeper" address="${r'${zookeeper_registry}'}" />
 
-    <dubbo:reference id="simpleService" interface="py.dubbosupport.sample.provider.service.SimpleService" registry="dev" />
+    <dubbo:reference id="simpleService" interface="${basePackageName}.service.SimpleService" registry="dev" />
 </beans>

@@ -1,9 +1,9 @@
-package py.dubbosupport.sample.provider.container;
+package ${basePackageName};
 
-import py.dubbosupport.container.Container;
+import ${basePackageName}.container.Container;
 
 /**
- * Created by pengyu on 2015/5/28.
+ * Created by Generator.
  */
 public class Main {
 	public static void main(String[] args) {
