@@ -135,7 +135,7 @@ public class Generator {
      * @throws IOException
      */
     private void buildJavaFile(String templateStr, String outputJavaDir, String packageName, String javaName) throws IOException, TemplateException {
-        Template template = cfg.getTemplate(replaceWithFileSeparator(templateStr));
+        Template template = cfg.getTemplate(templateStr);
         // 创建package包对应的文件夹
         File targetPackageDir = new File(co.getOutputDir() + co.getProjectName() + File.separator + outputJavaDir + packageToPath(packageName));
         if (!targetPackageDir.exists()) {
@@ -184,7 +184,7 @@ public class Generator {
      * @throws TemplateException
      */
     private void buildResourceFile(String templateStr, String outputResourceDir, String resourceName) throws IOException, TemplateException {
-        Template template = cfg.getTemplate(replaceWithFileSeparator(templateStr));
+        Template template = cfg.getTemplate(templateStr);
         // 创建资源文件所在的文件夹
         File targetResourceDir = new File(co.getOutputDir() + co.getProjectName() + File.separator + outputResourceDir);
         if (!targetResourceDir.exists()) {
@@ -220,19 +220,6 @@ public class Generator {
             Files.copy(ResourcesUtil.getResourceAsStream("/templates/" + file),
                     new File(co.getOutputDir() + co.getProjectName() + File.separator + file).toPath());
         }
-    }
-
-    /**
-     * 将unix路径名称中的"/"用运行时系统(windows, linux, mac os)的路径分隔符替代
-     *
-     * @param path
-     * @return
-     */
-    private String replaceWithFileSeparator(String path) {
-        if (path == null) {
-            return null;
-        }
-        return path.trim().replace("/", File.separator);
     }
 
 }
