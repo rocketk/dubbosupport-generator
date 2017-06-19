@@ -42,7 +42,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>fully.qualified.MainClass</mainClass>
+                            <mainClass>py.dubbosupport.Generator</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
