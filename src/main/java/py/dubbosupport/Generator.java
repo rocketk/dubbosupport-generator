@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 public class Generator {
     final Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
     final ConfigObject co = new ConfigObject();
-    final String DEFAULT_OUTPUT_DIR = System.getProperty("user.dir") + File.separator;
+    final String DEFAULT_OUTPUT_DIR = System.getProperty("user.dir") + File.separator + "output" + File.separator;
 
 
     private Generator() {
@@ -57,6 +57,7 @@ public class Generator {
 
     public static void main(String[] args) throws IOException, TemplateException {
         Generator main = new Generator();
+        System.out.println("output directory: " + main.co.getOutputDir());
         main.buildJavaFiles();
         main.buildResourceFiles();
         main.copyFiles();
@@ -83,7 +84,7 @@ public class Generator {
         if (packageName == null) {
             return null;
         }
-        String packageDirStr = packageName.replaceAll("\\.", File.separator);
+        String packageDirStr = packageName.replace(".", File.separator);
         if (!packageDirStr.endsWith(File.separator)) {
             packageDirStr += File.separator;
         }
@@ -100,7 +101,7 @@ public class Generator {
         if (path == null) {
             return null;
         }
-        String packageName = path.replaceAll("/", "\\.");
+        String packageName = path.replace("/", ".");
         if (packageName.endsWith("\\.")) {
             packageName = packageName.substring(0, packageName.length() - 1);
         }
@@ -231,7 +232,7 @@ public class Generator {
         if (path == null) {
             return null;
         }
-        return path.trim().replaceAll("/", File.separator);
+        return path.trim().replace("/", File.separator);
     }
 
 }
