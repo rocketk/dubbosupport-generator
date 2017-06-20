@@ -7,8 +7,8 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 /**
  * @author pengyu
@@ -19,33 +19,43 @@ public class Generator {
     final String DEFAULT_OUTPUT_DIR = System.getProperty("user.dir") + File.separator + "output" + File.separator;
 
 
-    private Generator() {
+    private Generator() throws MalformedURLException {
         loadConfig();
         loadFreemarkerConfiguration();
     }
 
-    private void loadConfig() {
-        co.setApplicationName(ConfigUtil.getString("applicationName"));
-        co.setArtifactId(ConfigUtil.getString("artifactId"));
-        co.setGroupId(ConfigUtil.getString("groupId"));
-        String outputDir = ConfigUtil.getString("outputDir");
+    private void loadConfig() throws MalformedURLException {
+        String customConfig = System.getProperty("user.dir") + File.separator + "customConfig.properties";
+        ConfigUtil configUtil = null;
+        File customConfigFile = new File(customConfig);
+        if (customConfigFile.exists() && customConfigFile.isFile()) {
+            configUtil = new ConfigUtil(customConfig);
+            System.out.println("use custom config: " + customConfig);
+        } else {
+            configUtil = new ConfigUtil(null);
+            System.out.println("use default config " );
+        }
+        co.setApplicationName(configUtil.getString("applicationName"));
+        co.setArtifactId(configUtil.getString("artifactId"));
+        co.setGroupId(configUtil.getString("groupId"));
+        String outputDir = configUtil.getString("outputDir");
         co.setOutputDir((outputDir == null || outputDir.isEmpty()) ? DEFAULT_OUTPUT_DIR : outputDir);
         if (!co.getOutputDir().endsWith(File.separator)) {
             co.setOutputDir(co.getOutputDir() + File.separator);
         }
-        co.setBasePackageName(ConfigUtil.getString("basePackageName"));
-        co.setBasePackageNamePath(packageToPath(ConfigUtil.getString("basePackageName")));
-        co.setProjectName(ConfigUtil.getString("projectName"));
-        co.setProviderPort(ConfigUtil.getString("providerPort"));
-        co.setVersion(ConfigUtil.getString("version"));
-        co.setZookeeper(ConfigUtil.getString("zookeeper"));
-        co.setSpringVersion(ConfigUtil.getString("springVersion"));
-        co.setDubboVersion(ConfigUtil.getString("dubboVersion"));
-        co.setJavaVersion(ConfigUtil.getString("javaVersion"));
-        co.setZookeeperVersion(ConfigUtil.getString("zookeeperVersion"));
-        co.setNexusRepoId(ConfigUtil.getString("nexusRepoId"));
-        co.setNexusReleaseUrl(ConfigUtil.getString("nexusReleaseUrl"));
-        co.setNexusSnapshotUrl(ConfigUtil.getString("nexusSnapshotUrl"));
+        co.setBasePackageName(configUtil.getString("basePackageName"));
+        co.setBasePackageNamePath(packageToPath(configUtil.getString("basePackageName")));
+        co.setProjectName(configUtil.getString("projectName"));
+        co.setProviderPort(configUtil.getString("providerPort"));
+        co.setVersion(configUtil.getString("version"));
+        co.setZookeeper(configUtil.getString("zookeeper"));
+        co.setSpringVersion(configUtil.getString("springVersion"));
+        co.setDubboVersion(configUtil.getString("dubboVersion"));
+        co.setJavaVersion(configUtil.getString("javaVersion"));
+        co.setZookeeperVersion(configUtil.getString("zookeeperVersion"));
+        co.setNexusRepoId(configUtil.getString("nexusRepoId"));
+        co.setNexusReleaseUrl(configUtil.getString("nexusReleaseUrl"));
+        co.setNexusSnapshotUrl(configUtil.getString("nexusSnapshotUrl"));
     }
 
     private void loadFreemarkerConfiguration() {
