@@ -7,9 +7,9 @@ dubbosupport-generator 是一个用于生成dubbo示例provider的代码生成�
 ## 自定义配置文件
 进入`generator-1.0`，新建`customConfig.properties`文件
 
-`$ touch customConfig.properties`
-`$ vim customConfig.properties`
-编辑文件，将下面的内容拷贝到文件中
+`$ touch customConfig.properties`  
+`$ vim customConfig.properties`  
+编辑文件，将下面的内容拷贝到文件中  
 ```properties
 groupId=com.your.company
 artifactId=sample-provider
@@ -55,7 +55,7 @@ nexusRepoId=
 
 
 ## 由生成的项目通过Maven打包而成的程序包
-在生成出来的项目`sample-provider`中，执行`mvn clean package -Dmaven.test.skip=true`命令打包，生成出来有2个包，`sample-provider-1.0-full.tar.gz` 
+在生成出来的项目`sample-provider`中，执行`mvn clean package -Dmaven.test.skip=true`命令打包，生成出来有2个包，`sample-provider-1.0-full.tar.gz` 和 `sample-provider-1.0-interface-only.jar`
 
 ### 完整包
 `sample-provider-1.0-full.tar.gz`，此程序包包含了程序所需的二进制类文件、依赖的jar包、运行脚本，你可以将其上传到服务器上运行，以启动dubbo provider程序。
