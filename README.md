@@ -114,5 +114,5 @@ bin/stop.sh | 关闭应用
 ```
 
 # 联系作者
-qq 450550330
+qq 450550330  
 email pengyufreedom@aliyun.com
